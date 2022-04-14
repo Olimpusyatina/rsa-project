@@ -12,7 +12,8 @@ import java.io.Writer;
 public class Main {
 
     static final Gson gson = new Gson();
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception {
+        if (args.length < 2) throw new Exception("There is not 2 arguments!!! Don't make it again!");
         try {
             Rectangles rects = gson.fromJson(new FileReader(args[0]), Rectangles.class);
             Rectangle intersectionRectangle = rects.getRectangles().get(0);

@@ -1,12 +1,13 @@
 package rectangleTools;
 
 import com.google.gson.Gson;
+import interfaces.RectangleInterface;
 
 import java.util.Objects;
 
 // TODO заменить координаты на точки
 
-public class Rectangle {
+public class Rectangle implements RectangleInterface {
     private Double x1, x2, y1, y2;
 
     @Override
@@ -29,7 +30,7 @@ public class Rectangle {
         setY1(y1);
     }
 
-    private void normalizeAxis(){
+    public void normalizeAxis(){
         Double cordTmp = getX1();
         if (getX1() > getX2()){
             setX1(getX2());
