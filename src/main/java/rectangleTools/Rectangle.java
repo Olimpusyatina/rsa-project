@@ -1,12 +1,26 @@
-package RectangleTools;
+package rectangleTools;
 
 import com.google.gson.Gson;
+
+import java.util.Objects;
 
 // TODO заменить координаты на точки
 
 public class Rectangle {
     private Double x1, x2, y1, y2;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rectangle rectangle = (Rectangle) o;
+        return Objects.equals(x1, rectangle.x1) && Objects.equals(x2, rectangle.x2) && Objects.equals(y1, rectangle.y1) && Objects.equals(y2, rectangle.y2);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x1, x2, y1, y2);
+    }
 
     public Rectangle(double x1, double y1, double x2, double y2) {
         setX1(x1);
@@ -61,6 +75,7 @@ public class Rectangle {
     }
 
     public Rectangle createIntersectRectangle(Rectangle rectangle){
+        if (this.equals(rectangle)) return this;
         double x1 = Math.max(getX1(), rectangle.getX1());
         double y1 = Math.max(getY1(), rectangle.getY1());
         double x2 = Math.min(getX2(), rectangle.getX2());

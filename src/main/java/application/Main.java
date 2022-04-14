@@ -1,15 +1,17 @@
-package Application;
+package application;
 
-import RectangleTools.Rectangle;
-import RectangleTools.Rectangles;
+import rectangleTools.Rectangle;
+import rectangleTools.Rectangles;
 import com.google.gson.Gson;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
 
 public class Main {
-    static Gson gson = new Gson();
+
+    static final Gson gson = new Gson();
     public static void main(String ... args){
         try {
             Rectangles rects = gson.fromJson(new FileReader(args[0]), Rectangles.class);
@@ -20,18 +22,18 @@ public class Main {
                 if (intersectionRectangle == null) break;
             }
             makeAnswer(intersectionRectangle, args[1]);
-            makeAnswer(rects.getRectangles().get(0), args[1]);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
     private static void makeAnswer(Rectangle rectangle, String path) throws IOException {
+        Writer writer = new FileWriter(path);
         if (rectangle == null){
-            FileWriter fw = new FileWriter(path);
-            fw.write("empty");
-            fw.close();
+            writer.write("empty");
         }else{
-            gson.toJson(rectangle, new FileWriter(path));
+            Rectangles rects = new Rectangles(rectangle);
+            gson.toJson(rects, writer);
         }
+        writer.close();
     }
 }
