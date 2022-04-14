@@ -12,7 +12,7 @@ import java.io.Writer;
 public class Main {
 
     static final Gson gson = new Gson();
-    public static void main(String ... args){
+    public static void main(String[] args){
         try {
             Rectangles rects = gson.fromJson(new FileReader(args[0]), Rectangles.class);
             Rectangle intersectionRectangle = rects.getRectangles().get(0);
